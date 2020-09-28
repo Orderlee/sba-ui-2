@@ -12,7 +12,7 @@ const TodoInput = () => {
     const submitForm = e =>{
         e.preventDefault() // default 기능은 막고, 내가 정의한 기능을 구현하라
         const newTodo ={
-            todoId:'',
+            todoId: uuid(),
             name: todo,
             complete: false
         }
@@ -26,7 +26,7 @@ const TodoInput = () => {
 
     }
     const addTodo = todo =>{
-        dispatch(addTodoAction) // 영속적으로 저장할 곳 state -> api -> db
+        dispatch(addTodoAction(todo)) // 영속적으로 저장할 곳 state -> api -> db
     }
     return <>
     <h1>할일 등록</h1>
