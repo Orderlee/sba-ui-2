@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import uuid from 'uuid/v4'
-import {} from 'react-redux'
+import {useDispatch} from 'react-redux'
+import {addTodoAction} from '../store/todoReducer'
+
 const TodoInput = () => {
     //todo 가 CRUD 대상(object) 입니다.
     // es6 이전 모드 var
@@ -8,7 +10,8 @@ const TodoInput = () => {
     // 함수는 const 타입에 할당
     // JSON = JavaScript Object Notation
     // object {'':'', '': () =>()}, array []
-    const [todo, setTodo] = useState(0) // todo 의 타입결정함
+    const [todo, setTodo] = useState(``) // todo 의 타입결정함
+    const dispatch = useDispatch()
     const submitForm = e =>{
         e.preventDefault() // default 기능은 막고, 내가 정의한 기능을 구현하라
         const newTodo ={
@@ -18,6 +21,7 @@ const TodoInput = () => {
         }
         addTodo(newTodo)
         setTodo("")
+        document.getElementById('input').value=''
 
     }
     const handlechange = e => {
@@ -32,7 +36,7 @@ const TodoInput = () => {
     <h1>할일 등록</h1>
     <form onSubmit={submitForm} method='POST'>
         <div>
-            <input type="text" name="todo" onChange={handlechange}/><br/>
+            <input type="text" name="todo" id='input' onChange={handlechange}/><br/>
             <input type="submit" value="ADD TODO"/>
         </div>
     </form>
